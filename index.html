@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LocalLoop - Delete Account</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 480px;
+            width: 100%;
+            padding: 40px;
+        }
+        
+        .logo-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: white;
+            font-weight: bold;
+        }
+        
+        h1 {
+            color: #2d3748;
+            font-size: 28px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .subtitle {
+            color: #718096;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        
+        .warning {
+            background: #fff5f5;
+            border-left: 4px solid #fc8181;
+            padding: 15px;
+            margin-bottom: 25px;
+            border-radius: 4px;
+        }
+        
+        .warning-title {
+            color: #c53030;
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        
+        .warning-text {
+            color: #742a2a;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            color: #4a5568;
+            font-weight: 500;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .delete-btn {
+            width: 100%;
+            background: #e53e3e;
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 10px;
+        }
+        
+        .delete-btn:hover {
+            background: #c53030;
+        }
+        
+        .delete-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .info-box {
+            background: #f7fafc;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 25px;
+        }
+        
+        .info-title {
+            color: #2d3748;
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        .info-list {
+            color: #4a5568;
+            font-size: 13px;
+            line-height: 1.8;
+            padding-left: 20px;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 25px;
+            color: #a0aec0;
+            font-size: 12px;
+        }
+        
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .success-message {
+            display: none;
+            background: #f0fff4;
+            border-left: 4px solid #48bb78;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        
+        .success-message.show {
+            display: block;
+        }
+        
+        .success-text {
+            color: #22543d;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-container">
+            <div class="logo">LL</div>
+            <h1>Delete Account</h1>
+            <p class="subtitle">We're sorry to see you go</p>
+        </div>
+        
+        <div class="success-message" id="successMessage">
+            <p class="success-text">Your deletion request has been submitted successfully. We'll process it within 7-14 business days and send a confirmation to your email.</p>
+        </div>
+        
+        <div class="warning">
+            <div class="warning-title">⚠️ Warning: This action cannot be undone</div>
+            <p class="warning-text">Deleting your account will permanently remove all your data, including reviews, followed users, and profile information.</p>
+        </div>
+        
+        <form id="deleteForm" onsubmit="handleSubmit(event)">
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    placeholder="Enter your registered email"
+                    required
+                >
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input 
+                    type="password" 
+                    id="password" 
+                    name="password" 
+                    placeholder="Enter your password"
+                    required
+                >
+            </div>
+            
+            <button type="submit" class="delete-btn">Delete My Account</button>
+        </form>
+        
+        <div class="info-box">
+            <div class="info-title">What happens when you delete your account:</div>
+            <ul class="info-list">
+                <li>All personal data will be permanently deleted</li>
+                <li>Your reviews and ratings will be removed</li>
+                <li>You'll be unfollowed from all users</li>
+                <li>Your profile will be deactivated immediately</li>
+                <li>Data deletion will be completed within 7-14 business days</li>
+            </ul>
+        </div>
+        
+        <div class="footer">
+            Need help? Contact us at <a href="mailto:support@localloop.com">support@localloop.com</a>
+        </div>
+    </div>
+    
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            const subject = encodeURIComponent('Account Deletion Request - LocalLoop');
+            const body = encodeURIComponent(`
+Account Deletion Request
+
+Email: ${email}
+Request Date: ${new Date().toLocaleString()}
+
+Please delete my LocalLoop account and all associated data.
+
+Note: This is an automated email from the account deletion page.
+            `);
+            
+            window.location.href = `mailto:support@localloop.com?subject=${subject}&body=${body}`;
+            
+            document.getElementById('successMessage').classList.add('show');
+            document.getElementById('deleteForm').reset();
+            
+            setTimeout(() => {
+                document.getElementById('successMessage').classList.remove('show');
+            }, 10000);
+        }
+    </script>
+</body>
+</html>
